@@ -1,0 +1,3 @@
+PyYAML
+txzmq
+py-trello
