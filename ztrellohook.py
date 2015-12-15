@@ -59,12 +59,18 @@ class TrelloHook(resource.Resource):
             request.setResponseCode(404)
             return 'Invalid page %s' % headers
 
-        if not validate_request(request.content.getvalue(),
-                                _CONFIG.get('webhook', ''),
-                                _CONFIG["trello_api_secret"],
-                                headers['x-trello-webhook']):
+        valid = False
+        for key in _CONFIG["trello_api_secrets"]:
+            valid = validate_request(request.content.getvalue(),
+                                     _CONFIG.get('webhook', ''),
+                                     key,
+                                     headers['x-trello-webhook'])
+            if valid:
+                break
+        if not valid:
             request.setResponseCode(404)
-            log.msg('Not called from trello.com: %s' % headers['x-trello-webhook'])
+            log.msg('Not called from trello.com: %s' %
+                    headers['x-trello-webhook'])
             log.msg('content: %s' % request.content.getvalue())
             return 'Not called from trello.com.'
 

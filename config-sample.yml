@@ -2,8 +2,10 @@
 port: 8888
 # webook url passed to trello.com
 webhook: http://<server ip or fqdn>:8888/
-# trello token
-trello_api_secret: API_SECRET
+# trello api secret keys
+trello_api_secrets:
+  - API_SECRET1
+  - API_SECRET2
 # 0MQ socket connection: bind|connect
 method: bind
 # 0MQ Endpoint
