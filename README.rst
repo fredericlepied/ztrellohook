@@ -28,6 +28,11 @@ To obtain your token: https://trello.com/1/authorize?key=API-KEY-HERE&name=Trell
 Register your Trello webhook
 ++++++++++++++++++++++++++++
 
+You need to have the webserver running before registering your webhook
+as trello will call the webhook to validate that the url is correct::
+  
+  $ ./ztrellohook.py
+
 To register your webhook, you can use the following command::
 
    $ ./register-hook.py <board id> <trello api key> <trello token>
